@@ -6,6 +6,4 @@ var mc = new Minecraft({
   salt: 'salty'
 });
 
-mc.call('getWorlds', function (err, data) {
-  console.log(data);
-});
+mc.call('getPlayer', 'diffference', console.log);

@@ -4,8 +4,7 @@ var request = require('request');
 var Minecraft = module.exports = function (options) {
   var defaults = {
     host: 'localhost',
-    port: 20059,
-    salt: 'lulz'
+    port: 20059
   }
 
   this._ = options || {};
@@ -24,6 +23,9 @@ Minecraft.prototype.generateUrl = function (method, args) {
     '&key=' + key +
     '&tag=null';
   if (args) {
+    if (typeof args != 'object') {
+      args = [args];
+    }
     url += '&args=' + escape(JSON.stringify(args));
   }
   return url;
@@ -43,8 +45,13 @@ Minecraft.prototype.call = function (method, args, cb) {
 
   var url = this.generateUrl(method, args);
   request(url, function (err, res, body) {
-    body = JSON.parse(body);
-    if (cb) cb(err, body[body.result]);
+    try {
+      body = JSON.parse(body);
+    } catch (e) {
+      console.log('Could not parse: ' + body);
+    }
+
+    if (cb) cb(err, body && body[body.result] || body);
   });
 }
 
