@@ -1,6 +1,6 @@
 #node-minecraft
 
-A simple abstraction for interacting with the Bukkit JSONAPI plugin in node
+A simple abstraction for interacting with the <a href="https://github.com/alecgorge/jsonapi">Bukkit JSONAPI plugin</a> in node
 
 ![](http://i.imgur.com/qw3fA.png)
 
